@@ -2,10 +2,8 @@
 # Буфер начало
 ob_start();
 
-# Время выполнение основного скрипта
-$sistem_time=microtime();
-
-# Размер требуемой памяти
+# Время выполнение и размер памяти для скрипта
+$sistem_time=microtime(); 
 $sistem_ram=memory_get_usage();
 ?>
 <html>
@@ -45,8 +43,6 @@ $url=$Zsecurity->Zurl($_POST['url']);
 $onlytext=$Zsecurity->Zonlytext($_POST['onlytext']);
 $html=$Zsecurity->Zhtml($_POST['html']);
 $nohtml=$Zsecurity->Znohtml($_POST['nohtml']);
-$safedb=$Zsecurity->Zsafedb($_POST['safedb']);
-$xss=$Zsecurity->Zxss($_POST['xss']);
 
 #print_r($_POST);
 
@@ -58,8 +54,6 @@ echo "Ввод url - ".$_POST['url']." | Фильтр url - ".$url."<br />";
 echo "Ввод onlytext - ".$_POST['onlytext']." | Фильтр onlytext - ".$onlytext."<br />";
 echo "Ввод html - ".$_POST['html']." | Фильтр html - ".$html."<br />";
 echo "Ввод nohtml - ".$_POST['nohtml']." | Фильтр nohtml - ".$nohtml."<br />";
-echo "Ввод safedb - ".$_POST['safedb']." | Фильтр safedb - ".$safedb."<br />";
-echo "Ввод xss - ".$_POST['xss']." | Фильтр xss - ".$xss."<br />";
 
 }else{
     
@@ -83,11 +77,6 @@ html:<br />
 <textarea name="html"></textarea><br />
 nohtml:<br />
 <textarea name="nohtml"></textarea><br />
-safedb:<br />
-<textarea name="safedb"></textarea><br />
-xss:<br />
-<textarea name="xss"></textarea><br />
-<br />
 <input type='submit' name='ok_post' value='Отправить' />
 </form>
 <?php
@@ -102,7 +91,7 @@ xss:<br />
 # Буфер очистка кеша
 $content=ob_get_contents();
 
-# Считаем нужные показания
+# Считаем время выполнения и затраченую память на скрипт
 $sistem_time_end=round(microtime()-$sistem_time,3);
 $sistem_ram_end=round((memory_get_usage()-$sistem_ram)/1024,2);
 
